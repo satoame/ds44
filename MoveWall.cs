@@ -5,13 +5,9 @@ using UnityEngine;
 public class MoveWall: Trap
 {
 
-    [SerializeField]
     float moveX;
-    [SerializeField]
     float moveY;
-    [SerializeField]
     float moveZ;
-    [SerializeField]
     float speed;
 
     float step;

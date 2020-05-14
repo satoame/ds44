@@ -4,20 +4,9 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    [SerializeField]
     protected float waitTime;
 
     protected bool stop = false;
-
-    protected virtual void Start()
-    {
-
-    }
-
-    protected virtual void Update()
-    {
-
-    }
 
     protected IEnumerator Wait()
     {

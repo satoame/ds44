@@ -1,22 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Threading;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public float speed;
-    public Shot shotPrefab; // 弾のプレハブ
-    public float shotSpeed; // 弾の移動の速さ
-    public float shotAngleRange; // 複数の弾を発射する時の角度
-    public float shotTimer; // 弾の発射タイミングを管理するタイマー
-    public int shotCount; // 弾の発射数
-    public float shotInterval; // 弾の発射間隔（秒）
-    public int hpMax; //HP最大
-    public int hp;//HP
-    public static Player instance;//管理
+    // 弾のプレハブ
+    public Shot shotPrefab;
+    // 弾の移動の速さ
+    public float shotSpeed;
+    // 複数の弾を発射する時の角度
+    public float shotAngleRange;
+    // 弾の発射タイミングを管理するタイマー
+    public float shotTimer;
+    // 弾の発射数
+    public int shotCount;
+    // 弾の発射間隔（秒）
+    public float shotInterval;
+    //HP最大
+    public int hpMax;
+    //HP
+    public int hp;
+    //管理
+    public static Player instance;
     public GameObject bomb;
     public GameObject bomb1;
+    // 宝石を引きつける距離
+    public float magnetDistance;
+    public AudioClip damageSE;
+
     void Awake()
     {
         hp = hpMax;
@@ -39,7 +53,7 @@ public class Player : MonoBehaviour
         var screenPos = Camera.main.WorldToScreenPoint(transform.position);
 
         // プレイヤーから見たマウスカーソルの方向を計算する
-        var direction = Input.mousePosition - screenPos;
+       var direction = Input.mousePosition - screenPos;
 
         // マウスカーソルが存在する方向の角度を取得する
         var angle = Scroll.GetAngle(Vector3.zero, direction);
@@ -59,7 +73,7 @@ public class Player : MonoBehaviour
         shotTimer = 0;
 
         //撃つ
-         P_Shot(angle, shotAngleRange, shotSpeed, shotCount);
+        P_Shot(angle, shotAngleRange, shotSpeed, shotCount);
     }
 
     public void P_Shot(float angleBase, float angleRange, float speed, int count)
@@ -93,12 +107,15 @@ public class Player : MonoBehaviour
 
     public void Damage(int damage)
     {
+        // ダメージを受けた時の SE を再生する
+        var audioSource = FindObjectOfType<AudioSource>();
+        audioSource.PlayOneShot(damageSE);
         hp -= damage;
         Instantiate(bomb1, this.transform.position, Quaternion.identity);
         if (0 < hp) return;
         //爆発
         Instantiate(bomb, this.transform.position, Quaternion.identity);
-        
+
         gameObject.SetActive(false);
     }
 }

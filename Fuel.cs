@@ -10,6 +10,8 @@ public class Fuel : MonoBehaviour
     public int f_exp;
     public float brake;
     public float obeyAccel = 0.01f;
+    //音
+    public AudioClip fuelSE;
     //方向
     private Vector3 direction;
     private float speed;
@@ -20,12 +22,12 @@ public class Fuel : MonoBehaviour
     void Update()
     {
         //位置取得
-        var playerPos = playerPos.instance.transform.localPosition;
+        var player = Player.instance.transform.localPosition;
 
-        var distance = Vector3.Distance(playerPos, transform.localPosition);
+        var distance = Vector3.Distance(player, transform.localPosition);
 
         //近づいたとき
-        if(distance < playerPos.instance.magnetDistance)
+        if(distance < Player.instance.magnetDistance)
         {
             isObey = true;
         }
@@ -33,7 +35,7 @@ public class Fuel : MonoBehaviour
         if (isObey && Player.instance.gameObject.activeSelf)
         {
            
-            var direction = playerPos - transform.localPosition;
+            var direction = player - transform.localPosition;
             direction.Normalize();
 
             // 宝石をプレイヤーが存在する方向に移動する
@@ -61,7 +63,6 @@ public class Fuel : MonoBehaviour
         //方向ﾗﾝﾀﾞﾑ
         var angle = Random.Range(0, 360);
 
-     
         var j = angle * Mathf.Deg2Rad;
 
         direction = new Vector3(Mathf.Cos(j), Mathf.Sin(j), 0);
@@ -71,5 +72,16 @@ public class Fuel : MonoBehaviour
 
         //削除
         Destroy(gameObject, 4);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.name.Contains("Player")) return;
+
+        Destroy(gameObject);
+
+        //再生する
+        var audioSource = FindObjectOfType<AudioSource>();
+        audioSource.PlayOneShot(fuelSE);
     }
 }

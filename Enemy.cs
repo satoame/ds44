@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Security.Cryptography;
 
 public enum E_TYPE
 {
@@ -17,17 +18,25 @@ public class Enemy : MonoBehaviour
 {
     public Vector2 s_respawnPosition;
     public Vector2 o_respawnPosition;
+    //速度
     public float speed;
+    //HP
     public int hpMax;
     public int f_exp;
+    //ダメージ
     public int damage;
     private int e_hp;
     private Vector3 direction;
+    //爆発
     public Explosion explosionPrefab;
     public bool isFollow;
+    //アイテム
     public Fuel[] f_fuelPrefabs;
     public float fuelSpeedmin;
     public float fuelSpeedmax;
+    //音
+    public AudioClip deathSE;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -114,7 +123,27 @@ public class Enemy : MonoBehaviour
 
             if (0 < e_hp) return;
 
+            // 敵を倒した時の SE を再生する
+            var audioSource = FindObjectOfType<AudioSource>();
+            audioSource.PlayOneShot(deathSE);
+
             Destroy(gameObject);
+
+            var exp = f_exp;
+
+        //アイテム
+        while ( 0 < exp)
+            {
+                var fuelPrefabs = f_fuelPrefabs.Where(c => c.f_exp <= exp).ToArray();
+
+                var f_fuelPrefab = fuelPrefabs[Random.Range(0, fuelPrefabs.Length)]; 
+
+                var gem = Instantiate(f_fuelPrefab, transform.localPosition, Quaternion.identity);
+
+                gem.Init(f_exp, fuelSpeedmin, fuelSpeedmax);
+
+                exp -= gem.f_exp;
+            }
         }
     }
 }

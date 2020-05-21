@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         var screenPos = Camera.main.WorldToScreenPoint(transform.position);
 
         // プレイヤーから見たマウスカーソルの方向を計算する
-       var direction = Input.mousePosition - screenPos;
+        var direction = Input.mousePosition - screenPos;
 
         // マウスカーソルが存在する方向の角度を取得する
         var angle = Scroll.GetAngle(Vector3.zero, direction);
@@ -102,6 +102,15 @@ public class Player : MonoBehaviour
             var shot = Instantiate(shotPrefab, pos, rot);
 
             shot.Init(angleBase, speed);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        //プレイヤー当たり判定
+        if (collision.name.Contains("Eshot"))
+        {
+           // Damage(damage);
         }
     }
 

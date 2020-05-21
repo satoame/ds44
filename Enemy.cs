@@ -102,7 +102,6 @@ public class Enemy : MonoBehaviour
         transform.localPosition = pos;
     }
    
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //プレイヤー当たり判定

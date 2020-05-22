@@ -1,15 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyShot : MonoBehaviour
 {
+    //public Player player;
     public GameObject EshotPrefab;
     public float speed;
     private int timeCount = 0;
-    public int damage;
-
     void Update()
     {
         timeCount += 1;

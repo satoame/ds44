@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -19,23 +18,16 @@ public class Player : MonoBehaviour
     public int shotCount;
     // 弾の発射間隔（秒）
     public float shotInterval;
-    //HP最大
-    public int hpMax;
-    //HP
-    public int hp;
     //管理
     public static Player instance;
-    public GameObject bomb;
-    public GameObject bomb1;
     // 宝石を引きつける距離
     public float magnetDistance;
-    public AudioClip damageSE;
 
     void Awake()
     {
-        hp = hpMax;
         instance = this;
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -103,28 +95,5 @@ public class Player : MonoBehaviour
 
             shot.Init(angleBase, speed);
         }
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        //プレイヤー当たり判定
-        if (collision.name.Contains("Eshot"))
-        {
-           // Damage(damage);
-        }
-    }
-
-    public void Damage(int damage)
-    {
-        // ダメージを受けた時の SE を再生する
-        var audioSource = FindObjectOfType<AudioSource>();
-        audioSource.PlayOneShot(damageSE);
-        hp -= damage;
-        Instantiate(bomb1, this.transform.position, Quaternion.identity);
-        if (0 < hp) return;
-        //爆発
-        Instantiate(bomb, this.transform.position, Quaternion.identity);
-
-        gameObject.SetActive(false);
     }
 }

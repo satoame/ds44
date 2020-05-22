@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Security.Cryptography;
+using UnityEngine.SceneManagement;
 
 public enum E_TYPE
 {
@@ -16,6 +16,7 @@ public enum E_TYPE
 
 public class Enemy : MonoBehaviour
 {
+    //public Player player;
     public Vector2 s_respawnPosition;
     public Vector2 o_respawnPosition;
     //速度
@@ -102,22 +103,14 @@ public class Enemy : MonoBehaviour
         transform.localPosition = pos;
     }
    
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        //プレイヤー当たり判定
-        if(collision.name.Contains("Player"))
-        {
-            var player = collision.GetComponent<Player>();
-            player.Damage(damage);
-            return;
-        }
-
         // 弾当たり判定
-        if (collision.name.Contains("shot"))
+        if (collider.gameObject.tag == "shot")
         {
-            Instantiate(explosionPrefab, collision.transform.localPosition, Quaternion.identity);
+            Instantiate(explosionPrefab, collider.transform.localPosition, Quaternion.identity);
 
-            Destroy(collision.gameObject);
+            Destroy(collider.gameObject);
             e_hp--;
 
             if (0 < e_hp) return;

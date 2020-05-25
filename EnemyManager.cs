@@ -5,29 +5,36 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public Enemy[] enemyPrefabs;
-    //間隔
-    public float interval;
-    //出現
+
+    // 出現間隔（秒）
     public float intervalFrom;
     public float intervalTo;
-    //最大
-    public float maxTime;
-    //経過
-    public float progressTime;
-    private float timer;
+
+    // 経過時間最大
+    public float TimeMax;
+    // 経過時間
+    public float elapsedTime;
+    // 出現タイミング管理
+    private float timer; 
 
     void Update()
     {
-        // タイマーを更新する
-        progressTime += Time.deltaTime;
+        // 更新する
+        elapsedTime += Time.deltaTime;
 
-        // タイマーをリセットする
-        timer += Time.deltaTime;
+        // 出現管理する
+        m_timer += Time.deltaTime;
 
-        var t = progressTime / maxTime;
-       // var interval = Mathf.Lerp
+        var t = elapsedTime / TimeMax;
+        var interval = Mathf.Lerp(intervalFrom, intervalTo, t);
 
-        // 出現する敵をランダムに決定する
+        // 敵が出現するタイミングではない場合
+        if (timer < interval) return;
+
+        //タイマーをリセットする
+        timer = 0;
+
+        // 出現敵ランダム
         var enemyIndex = Random.Range(0, enemyPrefabs.Length);
 
         var enemyPrefab = enemyPrefabs[enemyIndex];
@@ -37,7 +44,7 @@ public class EnemyManager : MonoBehaviour
         var respawnType = (E_TYPE)Random.Range(
             0, (int)E_TYPE.NUMBER);
 
-        // 敵を初期化する
+        // 初期化
         enemy.Init(respawnType);
     }
 }

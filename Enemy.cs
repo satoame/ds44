@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public enum E_TYPE
 {
     UP,
@@ -37,28 +38,33 @@ public class Enemy : MonoBehaviour
     public float fuelSpeedmax;
     //音
     public AudioClip deathSE;
-
+    //カウント
+    public int count;
+    //スコア
+    public int scoreV;
+    private ScoreManager sm;
     // Start is called before the first frame update
     void Start()
     {
         e_hp = hpMax;
+        sm = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-         if(isFollow)
-         {
-             var angle = Scroll.GetAngle(transform.localPosition, Player.instance.transform.localPosition);
-             var direction = Scroll.GetDirection(angle);
+        if (isFollow)
+        {
+            var angle = Scroll.GetAngle(transform.localPosition, Player.instance.transform.localPosition);
+            var direction = Scroll.GetDirection(angle);
 
-             transform.localPosition += direction * speed;
+            transform.localPosition += direction * speed;
 
-             var angles = transform.localEulerAngles;
-             angles.z = angle - 90;
-             transform.localEulerAngles = angles;
-             return;
-         }
+            var angles = transform.localEulerAngles;
+            angles.z = angle - 90;
+            transform.localEulerAngles = angles;
+            return;
+        }
         transform.localPosition += direction * speed;
     }
 
@@ -102,8 +108,8 @@ public class Enemy : MonoBehaviour
         }
         transform.localPosition = pos;
     }
-   
-    private void OnTriggerEnter2D(Collider2D collider)
+
+    void OnTriggerEnter2D(Collider2D collider)
     {
         // 弾当たり判定
         if (collider.gameObject.tag == "shot")
@@ -112,23 +118,22 @@ public class Enemy : MonoBehaviour
 
             Destroy(collider.gameObject);
             e_hp--;
-
             if (0 < e_hp) return;
-
+           
             // 敵を倒した時の SE を再生する
             var audioSource = FindObjectOfType<AudioSource>();
             audioSource.PlayOneShot(deathSE);
-
             Destroy(gameObject);
-
+            count++;
+            Debug.Log(count);
             var exp = f_exp;
-
-        //アイテム
-        while ( 0 < exp)
+            sm.Scorel(scoreV);
+            //アイテム
+            while (0 < exp)
             {
                 var fuelPrefabs = f_fuelPrefabs.Where(c => c.f_exp <= exp).ToArray();
 
-                var f_fuelPrefab = fuelPrefabs[Random.Range(0, fuelPrefabs.Length)]; 
+                var f_fuelPrefab = fuelPrefabs[Random.Range(0, fuelPrefabs.Length)];
 
                 var gem = Instantiate(f_fuelPrefab, transform.localPosition, Quaternion.identity);
 
@@ -136,6 +141,8 @@ public class Enemy : MonoBehaviour
 
                 exp -= gem.f_exp;
             }
+           
         }
     }
 }
+

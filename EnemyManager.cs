@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
         elapsedTime += Time.deltaTime;
 
         // 出現管理する
-        m_timer += Time.deltaTime;
+        timer += Time.deltaTime;
 
         var t = elapsedTime / TimeMax;
         var interval = Mathf.Lerp(intervalFrom, intervalTo, t);

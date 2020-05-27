@@ -1,20 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveWall: Trap
 {
-
-    float moveX;
-    float moveY;
-    float moveZ;
-    float speed;
+    
+    public float moveX;
+    public float moveY;
+    public float moveZ;
+    public float speed;
 
     float step;
     bool goBack = false;
     Vector3 origin;
     Vector3 destination;
-
+    public float accel;
+    
     void Start()
     {
         origin = transform.position;
@@ -54,12 +56,11 @@ public class MoveWall: Trap
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+   /* void OnCollisionEnter2D(Collision2D collision)
     {
-        // 弾当たり判定
-        if (collision.name.Contains("shot"))
+        if (collision.gameObject.tag == "shot")
         {
-            Destroy(collision.gameObject);
+            Debug.Log("collision");
         }
-    }
+    }*/
 }

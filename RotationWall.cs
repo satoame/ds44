@@ -4,14 +4,12 @@ using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
 
-public class RotateWall : Trap
+public class RotationWall : Trap
 {
-    float rotateX;
-    float rotateY;
-    float rotateZ;
+    public Vector3 pos;
 
     void Update()
     {
-        transform.Rotate(new Vector3(rotateX, rotateY, rotateZ) * Time.deltaTime, Space.World);
+        transform.Rotate(new Vector3(pos.x, pos.y, pos.z) * Time.deltaTime);
     }
 }

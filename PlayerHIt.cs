@@ -22,7 +22,7 @@ public class PlayerHIt : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         //プレイヤー当たり判定
-        if ((collider.gameObject.tag == "Enemy")||(collider.gameObject.tag == "EnemyS"))
+        if ((collider.gameObject.tag == "Enemy")||(collider.gameObject.tag == "EnemyS")||(collider.gameObject.tag == "Eshot"))
         {
             var player = collider.GetComponent<Player>();
             Damage(damage);

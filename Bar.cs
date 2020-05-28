@@ -23,10 +23,9 @@ public class Bar : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if((collider.gameObject.tag == "Enemy")||(collider.gameObject.tag == "Eshot"))
+        if((collider.gameObject.tag == "Enemy")||(collider.gameObject.tag == "EnemyS")|| (collider.gameObject.tag == "Eshot"))
         {
             int damage = 10;
-            // Debug.Log("damage : " + damage);
 
             Hp = Hp - damage;
 

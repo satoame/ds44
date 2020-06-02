@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Threading;
 using UnityEngine;
 
 public class ChangeMove : MonoBehaviour
@@ -18,11 +20,11 @@ public class ChangeMove : MonoBehaviour
 
         if (pos.y < 0)
         {
-            // 速度を０。
+            // 速度を０
             rb.velocity = Vector3.zero;
 
             //力を加える
-            //
+            rb.AddForce(new Vector3(300, 0, 300) * Time.deltaTime * -30);
         }
     }
 }

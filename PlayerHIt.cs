@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHIt : MonoBehaviour
+public class PlayerHit : MonoBehaviour
 {
     //public Player player;
     public int damage;
+    public int add;
     //HP
     public int hp;
     //HP最大
@@ -22,13 +23,18 @@ public class PlayerHIt : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         //プレイヤー当たり判定
-        if ((collider.gameObject.tag == "Enemy")||(collider.gameObject.tag == "EnemyS")||(collider.gameObject.tag == "Eshot"))
+        if ((collider.gameObject.tag == "Enemy") || (collider.gameObject.tag == "EnemyS") || (collider.gameObject.tag == "Eshot"))
         {
             var player = collider.GetComponent<Player>();
             Damage(damage);
         }
+        if (collider.gameObject.tag == "HPItem")
+        {
+            AddHP(add);
+        }
     }
 
+    //ダメージ
     public void Damage(int damage)
     {
         // ダメージを受けた時の SE を再生する
@@ -40,5 +46,17 @@ public class PlayerHIt : MonoBehaviour
         //爆発
         Instantiate(bomb, this.transform.position, Quaternion.identity);
         gameObject.SetActive(false);
+    }
+
+
+    //回復
+    public void AddHP(int add)
+    {
+        hp += add;
+
+        if (hp > hpMax)
+        {
+            hp = hpMax;
+        }
     }
 }

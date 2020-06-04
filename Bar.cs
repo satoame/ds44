@@ -32,5 +32,13 @@ public class Bar : MonoBehaviour
             slider.value = (float)Hp / (float)maxHp;
            
         }
+        if(collider.gameObject.tag == "HPItem")
+        {
+            int add = 10;
+
+            Hp = Hp + add;
+
+            slider.value = (float)Hp / (float)maxHp;
+        }
     }
 }

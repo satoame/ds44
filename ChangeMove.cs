@@ -21,10 +21,10 @@ public class ChangeMove : MonoBehaviour
         if (pos.y < 0)
         {
             // 速度を０
-            rb.velocity = Vector3.zero;
+           // rb.velocity = Vector3.zero;
 
             //力を加える
-            rb.AddForce(new Vector3(300, 0, 300) * Time.deltaTime * -30);
+            rb.AddForce(new Vector3(300, 300, 300) * Time.deltaTime * -40);
         }
     }
 }

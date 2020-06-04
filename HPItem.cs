@@ -9,12 +9,12 @@ public class HPItem : MonoBehaviour
    
     void Start()
     {
-        playerHit = GameObject.Find("player").GetComponent<PlayerHit>();
+        playerHit = GameObject.Find("Player").GetComponent<PlayerHit>();
     }
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.tag == "player")
+        if (collider.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
 

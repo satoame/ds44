@@ -1,35 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class EnemyHit : MonoBehaviour
 {
-    //HP
-    public int hpMax;
-    public int f_exp;
-    //ダメージ
-    public int damage;
-    private int e_hp;
-    //爆発
-    public Explosion explosionPrefab;
-    //アイテム
-    public Fuel[] f_fuelPrefabs;
-    public float fuelSpeedmin;
-    public float fuelSpeedmax;
-    //音
-    public AudioClip deathSE;
-    //カウント
-    public int count;
+    public GameObject effectPrefab;
+    public GameObject[] items;
+    public AudioClip sound;
+    public int enemyHP;
     //スコア
     public int scoreV;
     private ScoreManager sm;
+    //爆発
+    public Explosion explosionPrefab;
+    //ダメージ
+    public int damage;
+    //音
+    public AudioClip deathSE;
 
     void Start()
     {
-        e_hp = hpMax;
         sm = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
     }
+
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -39,30 +33,23 @@ public class EnemyHit : MonoBehaviour
             Instantiate(explosionPrefab, collider.transform.localPosition, Quaternion.identity);
 
             Destroy(collider.gameObject);
-            e_hp--;
-            if (0 < e_hp) return;
+            enemyHP--;
 
-            // 敵を倒した時の SE を再生する
-            var audioSource = FindObjectOfType<AudioSource>();
-            audioSource.PlayOneShot(deathSE);
-            Destroy(gameObject);
-            count++;
-            var exp = f_exp;
-            sm.Scorel(scoreV);
-            //アイテム
-            while (0 < exp)
+            if (enemyHP == 0)
             {
-                var fuelPrefabs = f_fuelPrefabs.Where(c => c.f_exp <= exp).ToArray();
-
-                var f_fuelPrefab = fuelPrefabs[Random.Range(0, fuelPrefabs.Length)];
-
-                var gem = Instantiate(f_fuelPrefab, transform.localPosition, Quaternion.identity);
-
-                gem.Init(f_exp, fuelSpeedmin, fuelSpeedmax);
-
-                exp -= gem.f_exp;
+                // 敵SE
+                var audioSource = FindObjectOfType<AudioSource>();
+                audioSource.PlayOneShot(deathSE);
+                Destroy(gameObject);
+                sm.Scorel(scoreV);
             }
-
+            //アイテム
+            if (items.Length != 0)
+            {
+                int itemNumber = Random.Range(0, items.Length);
+               
+            }
         }
     }
+
 }

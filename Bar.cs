@@ -6,15 +6,19 @@ using UnityEngine.UI;
 
 public class Bar : MonoBehaviour
 {
+    private PlayerHit playerHit;
     //最大
     int maxHp = 100;
     //今
-    int Hp; 
+    int Hp;
+    private int reward = 10;
 
     public Slider slider;
 
     void Start()
     {
+        playerHit = GameObject.Find("Player").GetComponent<PlayerHit>();
+
         //フル
         slider.value = 1;
 
@@ -34,11 +38,9 @@ public class Bar : MonoBehaviour
         }
         if(collider.gameObject.tag == "HPItem")
         {
-            int add = 10;
-
-            Hp = Hp + add;
-
-            slider.value = (float)Hp / (float)maxHp;
+            playerHit.AddHP(reward);
+        
+            slider.value = (float)playerHit.hp / (float)playerHit.hpMax;
         }
     }
 }

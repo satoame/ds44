@@ -6,7 +6,7 @@ public class HPItem : MonoBehaviour
 {
     private PlayerHit playerHit;
     private int reward = 10;
-   
+
     void Start()
     {
         playerHit = GameObject.Find("Player").GetComponent<PlayerHit>();

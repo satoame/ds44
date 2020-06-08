@@ -10,12 +10,12 @@ public class PlayerHit : MonoBehaviour
     //HP
     public int hp;
     //HP最大
-    public int hpMax;
+    public int hpMax = 100;
     public AudioClip damageSE;
     public GameObject bomb;
     public GameObject bomb1;
 
-    void Awak()
+    void Start()
     {
         hp = hpMax;
     }

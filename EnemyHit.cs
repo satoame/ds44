@@ -47,7 +47,7 @@ public class EnemyHit : MonoBehaviour
             if (items.Length != 0)
             {
                 int itemNumber = Random.Range(0, items.Length);
-               
+                Instantiate(items[itemNumber], transform.position, Quaternion.identity);
             }
         }
     }

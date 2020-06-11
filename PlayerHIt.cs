@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PlayerHit : MonoBehaviour
 {
-    //public Player player;
     public int damage;
     public int add;
     //HP
-    public int hp;
+   public int hp;
     //HP最大
     public int hpMax = 100;
     public AudioClip damageSE;

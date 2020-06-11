@@ -27,19 +27,18 @@ public class Bar : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if((collider.gameObject.tag == "Enemy")||(collider.gameObject.tag == "EnemyS")|| (collider.gameObject.tag == "Eshot"))
+        if ((collider.gameObject.tag == "Enemy") || (collider.gameObject.tag == "EnemyS") || (collider.gameObject.tag == "Eshot"))
         {
-            int damage = 10;
 
-            Hp = Hp - damage;
+            Hp = Hp - playerHit.damage;
 
-            slider.value = (float)Hp / (float)maxHp;
-           
+            slider.value = (float)playerHit.hp / (float)playerHit.hpMax;
+
         }
-        if(collider.gameObject.tag == "HPItem")
+        if (collider.gameObject.tag == "HPItem")
         {
             playerHit.AddHP(reward);
-        
+
             slider.value = (float)playerHit.hp / (float)playerHit.hpMax;
         }
     }

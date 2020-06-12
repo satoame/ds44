@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 
 public class EnemyHit : MonoBehaviour
@@ -18,7 +16,7 @@ public class EnemyHit : MonoBehaviour
     public int damage;
     //音
     public AudioClip deathSE;
-
+  
     void Start()
     {
         sm = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
@@ -42,13 +40,18 @@ public class EnemyHit : MonoBehaviour
                 audioSource.PlayOneShot(deathSE);
                 Destroy(gameObject);
                 sm.Scorel(scoreV);
+                //アイテム
+                if (items.Length != 0)
+                {
+                    int itemNumber = Random.Range(0, items.Length);
+                    //出現確率
+                    if (Random.Range(0, 4) == 0)
+                    {
+                        Instantiate(items[itemNumber], transform.position, Quaternion.identity);
+                    }
+                }
             }
-            //アイテム
-            if (items.Length != 0)
-            {
-                int itemNumber = Random.Range(0, items.Length);
-                Instantiate(items[itemNumber], transform.position, Quaternion.identity);
-            }
+            
         }
     }
 

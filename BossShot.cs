@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class BossShot: MonoBehaviour
@@ -7,7 +8,7 @@ public class BossShot: MonoBehaviour
     public GameObject eShotPrefab;
     public float speed;
     private int timeCount = 0;
-
+   
     void Update()
     {
         timeCount += 1;
@@ -24,6 +25,7 @@ public class BossShot: MonoBehaviour
             //削除
             Destroy(enemyShot, 5.0f);
         }
+
     }
 
 }

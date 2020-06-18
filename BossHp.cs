@@ -18,14 +18,6 @@ public class BossHP : MonoBehaviour
         way = GameObject.Find("Way").GetComponent<Way>();
     }
 
-    void Update()
-    {
-        if(bossHP <= 150)
-        {
-            way.Start(); 
-        }
-    }
-
     void Damege()
     {
         int damege = 10;
@@ -42,6 +34,12 @@ public class BossHP : MonoBehaviour
 
             //HP
             Damege();
+
+            //以下で変更
+            if (bossHP <= 150)
+            {
+                way.WayChange();
+            }
 
             //削除弾
             Destroy(collider.gameObject);

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Botshot : MonoBehaviour
 {
     public GameObject eshotPrefab;
-    public float shotSpeed;
+    public float speed;
     private int timeCount = 0;
 
     void Update()
@@ -15,15 +15,15 @@ public class Botshot : MonoBehaviour
         //タイム
         if (timeCount % 5 == 0)
         {
-            GameObject enemyShot = Instantiate(eshotPrefab, transform.position, Quaternion.identity) as GameObject;
+            GameObject enemyShot = Instantiate(eshotPrefab, transform.position, Quaternion.identity);
             Rigidbody2D enemyShotRb = enemyShot.GetComponent<Rigidbody2D>();
-            enemyShotRb.AddForce(transform.forward * shotSpeed);
+            enemyShotRb.AddForce(transform.up * -speed);
             Destroy(enemyShot, 20.0f);
         }
         
-        if (timeCount == 500)
+        if (timeCount ==  500)
         {
-            this.gameObject.AddComponent<Rota>().pos = new Vector3(0, -90, 0);
+            this.gameObject.AddComponent<Rota>().pos = new Vector3(0,0,90);
         }
     }
 }

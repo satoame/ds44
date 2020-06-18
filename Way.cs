@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class Way : MonoBehaviour
 {
-    public GameObject eShotPrefab;
+    public GameObject Wshot;
     public float speed;
     public int number;
 
-    public void Start()
-    {
+     public void WayChange()
+     {
         for (int i = 0; i < number; i++)
-        {
-            //生成する
-            GameObject enemyShot = Instantiate(eShotPrefab, transform.position, Quaternion.Euler(0, -30 + (15*i),0));
+         {
+             //生成する
+             GameObject WshotShot = Instantiate(Wshot, this.transform.position, Quaternion.Euler(0, -30 + (15 * i), 0));
 
-            Rigidbody2D enemyShotRb = enemyShot.GetComponent<Rigidbody2D>();
+             Rigidbody2D WshotShotRb = WshotShot.GetComponent<Rigidbody2D>();
 
-            enemyShotRb.AddForce(transform.up * -speed);
+             WshotShotRb.AddForce(transform.up * speed);
 
-            //削除
-            Destroy(enemyShot, 5.0f);
-        }
+             //時間削除
+             Destroy(WshotShot, 5.0f);
+         }
     }
 }

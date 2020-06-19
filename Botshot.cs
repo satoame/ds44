@@ -13,7 +13,7 @@ public class Botshot : MonoBehaviour
         timeCount += 1;
 
         //タイム
-        if (timeCount % 5 == 0)
+        if (timeCount % 30 == 0)
         {
             GameObject enemyShot = Instantiate(eshotPrefab, transform.position, Quaternion.identity);
             Rigidbody2D enemyShotRb = enemyShot.GetComponent<Rigidbody2D>();

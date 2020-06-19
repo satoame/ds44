@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHit : MonoBehaviour
 {
@@ -13,7 +15,7 @@ public class PlayerHit : MonoBehaviour
     public AudioClip damageSE;
     public GameObject bomb;
     public GameObject bomb1;
-
+   
     void Start()
     {
         hp = hpMax;
@@ -45,6 +47,8 @@ public class PlayerHit : MonoBehaviour
         //爆発
         Instantiate(bomb, this.transform.position, Quaternion.identity);
         gameObject.SetActive(false);
+
+        SceneManager.LoadScene("GameOver");
     }
 
 

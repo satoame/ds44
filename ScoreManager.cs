@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    private int score;
+    public int score;
     private Text scoreLabel;
 
     void Start()

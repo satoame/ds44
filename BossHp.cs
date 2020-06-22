@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class BossHP : MonoBehaviour
 {
-    public Way way;
+    public TargeShot targe;
+    public StayShot stay;
     public GameObject effectPrefab;
     public AudioClip destroySound;
     public int bossHP;
@@ -15,7 +16,8 @@ public class BossHP : MonoBehaviour
 
     void Start()
     {
-        way = GameObject.Find("Way").GetComponent<Way>();
+        targe = GameObject.Find("Targe").GetComponent<TargeShot>();
+        stay = GameObject.Find("Stay").GetComponent<StayShot>();
     }
 
     void Damege()
@@ -38,7 +40,8 @@ public class BossHP : MonoBehaviour
             //以下で変更
             if (bossHP <= 150)
             {
-                way.WayChange();
+                targe.TargeShotChange();
+                stay.StayChange();
             }
 
             //削除弾

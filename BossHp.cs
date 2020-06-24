@@ -43,7 +43,7 @@ public class BossHP : MonoBehaviour
                 targe.TargeShotChange();
                 stay.StayChange();
             }
-
+            
             //削除弾
             Destroy(collider.gameObject);
 

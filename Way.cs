@@ -2,25 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Way : MonoBehaviour
+class Way : MonoBehaviour
 {
-    public GameObject Wshot;
+    public BossHP boss;
+    public GameObject eShotPrefab;
     public float speed;
-    public int number;
+    public bool eshotflag = false;
+    private int timeCount = 0;
 
-     public void WayChange()
-     {
-        for (int i = 0; i < number; i++)
-         {
-             //生成する
-             GameObject WshotShot = Instantiate(Wshot, this.transform.position, Quaternion.Euler(0, -30 + (15 * i), 0));
+    void Update()
+    {
+        eshotflag = true;
+        timeCount += 1;
+        if (boss.bossHP <= 100)
+        {
+            if (timeCount % 60 == 0)
+            {
+                //生成する
+                GameObject enemyShot = Instantiate(eShotPrefab, transform.position, Quaternion.Euler(0, 0, 180));
 
-             Rigidbody2D WshotShotRb = WshotShot.GetComponent<Rigidbody2D>();
+                Rigidbody2D enemyShotRb = enemyShot.GetComponent<Rigidbody2D>();
 
-             WshotShotRb.AddForce(transform.up * speed);
+                enemyShotRb.AddForce(transform.up * speed);
 
-             //時間削除
-             Destroy(WshotShot, 5.0f);
-         }
+                //削除
+                Destroy(enemyShot, 5.0f);
+            }
+        }
     }
 }

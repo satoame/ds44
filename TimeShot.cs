@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
+﻿using System.Collections;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class TimeShot : MonoBehaviour
 {
-    public float MinSpeed = 60;
-    public float MaxSpeed = 300;
+    public float speed;
     public float nextSpeed;
 
-    private Rigidbody rb;
+    private Rigidbody2D rb;
     private GameObject target;
 
     private float timeCount = 0;
-    public float stopTime = 3; 
+    public float stopTime; 
 
     private float stopTimeCount = 0;
     private float nextStartTime = 2; 
@@ -25,7 +22,7 @@ public class TimeShot : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.forwrd * Random.Range(MinSpeed, MaxSpeed));
+        rb.AddForce(transform.up * speed);
         target = GameObject.Find("Player");
     }
 
@@ -36,10 +33,18 @@ public class TimeShot : MonoBehaviour
         if(timeCount >= stopTime && stopflage == false)
         {
             stopTimeCount += Time.deltaTime;
-            rb.velocity = Vector.zero;
-
+            rb.velocity = Vector3.zero;
+            Debug.Log("b");
             //プレイヤー方向
-
+            if(stopTimeCount >= nextStartTime)
+            {
+                Debug.Log("a");
+                this.gameObject.transform.LookAt(target.transform.position); 
+                rb.AddForce(transform.up * nextSpeed);
+                stopflage = true;
+            }
+           
         }
+        stopflage = false;
     }
 }

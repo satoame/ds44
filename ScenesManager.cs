@@ -8,7 +8,7 @@ public class ScenesManager : MonoBehaviour
     //スコア
     private ScoreManager sm;
     //hp
-    private BossHp boss;
+    private BossHP boss;
 
     void Start()
     {
@@ -24,7 +24,7 @@ public class ScenesManager : MonoBehaviour
             SceneManager.LoadScene("Hard");
         }*/
         
-        if(sm.score >= 50)
+        if(sm.score >= 250)
         {
             SceneManager.LoadScene("Very Hard");
         }

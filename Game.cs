@@ -3,15 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Restart : MonoBehaviour
+public class Game : MonoBehaviour
 {
-    public ScoreManager sm;
-
-    public void OnRestartButtonClicked()
+    public void OnRetry()
     {
         SceneManager.LoadScene("Game");
-
-        //スコアリセット
-        sm.score = 0;
     }
 }

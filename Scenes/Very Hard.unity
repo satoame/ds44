@@ -471,7 +471,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1196118189414351070, guid: 83d058b8ec675e44caac162ef32e6439,
     type: 3}
-  speed: 800
+  speed: 900
 --- !u!4 &323502485
 Transform:
   m_ObjectHideFlags: 0
@@ -660,7 +660,6 @@ GameObject:
   - component: {fileID: 514792263}
   - component: {fileID: 514792262}
   - component: {fileID: 514792261}
-  - component: {fileID: 514792265}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -751,18 +750,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &514792265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 514792260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce303417db89aac47ad19234b2d49ca5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &593248670 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6795737450393112721, guid: cf4230ee5593f06479d9613bff7f7bc3,
@@ -1412,7 +1399,7 @@ MonoBehaviour:
   effectPrefab: {fileID: 2591037463234009553, guid: 571ae1e991bb042408106a764b3a18d6,
     type: 3}
   destroySound: {fileID: 8300000, guid: c53b80786f4fc9848a26d4bf9fbbbc71, type: 3}
-  bossHP: 200
+  bossHP: 250
   deathSE: {fileID: 8300000, guid: 3483b0520c24edc4e8f94f47d7891119, type: 3}
 --- !u!114 &1129252529
 MonoBehaviour:
@@ -1946,7 +1933,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1196118189414351070, guid: 83d058b8ec675e44caac162ef32e6439,
     type: 3}
-  speed: 700
+  speed: 1000
 --- !u!4 &1935483088
 Transform:
   m_ObjectHideFlags: 0
